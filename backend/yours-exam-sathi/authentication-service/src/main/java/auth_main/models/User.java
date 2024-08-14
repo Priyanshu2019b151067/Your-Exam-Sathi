@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import org.springframework.data.annotation.Id;
+import org.springframework.stereotype.Indexed;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -13,6 +13,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -28,27 +29,22 @@ import lombok.NoArgsConstructor;
 
 
 
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
 @Table(name = "user_tbl",
 indexes = {
 		@Index(name = "idx_username", columnList = "userName"),
         @Index(name = "idx_email", columnList = "email")
-},	
-uniqueConstraints = {
-		@UniqueConstraint(columnNames = "userName"),
-        @UniqueConstraint(columnNames = "email")
 }
 )
 		
 public class User {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(columnDefinition = "BINARY(16)")
-	private UUID id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+  	private Long id;
 	
 	@Column(nullable = false,unique= true)
 	@NotBlank(message = "Username is required")

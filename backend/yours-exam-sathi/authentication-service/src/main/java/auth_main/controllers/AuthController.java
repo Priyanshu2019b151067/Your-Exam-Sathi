@@ -1,10 +1,16 @@
 package auth_main.controllers;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import auth_main.repositories.UserRepository;
+import auth_main.dtos.SignupRequest;
+import auth_main.repos.UserRepository;
+import auth_main.services.UserService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -12,10 +18,19 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthController {
 
+//	
+//	@GetMapping
+//	public String shriGanesh() {
+//		return "OM";
+//	}
 	
-	@GetMapping
-	public String shriGanesh() {
-		return "OM";
+	private final UserService userService;
+	
+	@PostMapping("/signup")
+	public ResponseEntity<String> registerUser(@Validated @RequestBody SignupRequest signupRequest){
+		userService.registerNewUser(signupRequest);
+		return ResponseEntity.ok("User registered successfully.");
 	}
+	
 	
 }

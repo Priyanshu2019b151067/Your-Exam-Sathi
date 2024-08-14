@@ -3,7 +3,6 @@ package auth_main.models;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import org.springframework.data.annotation.Id;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,6 +10,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
@@ -29,9 +29,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "profile_tbl")
 public class Profile {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(columnDefinition = "BINARY(16)")
-	private UUID id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	
 	@Column(nullable = false)
 	private String firstName;
@@ -45,10 +44,10 @@ public class Profile {
 	private String avatarUrl;
 
 	@Column(nullable = false)
-	private boolean isVerified = false;
+	private boolean isVerified;
 
 	@Column(nullable = false)
-	private boolean isPremium = false;
+	private boolean isPremium;
 
 	@Enumerated(EnumType.STRING)
 	@Column(length = 20)

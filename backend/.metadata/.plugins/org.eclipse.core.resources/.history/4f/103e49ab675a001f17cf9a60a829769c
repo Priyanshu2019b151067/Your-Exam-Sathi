@@ -1,0 +1,51 @@
+package auth_main.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import auth_main.dtos.SignupRequest;
+import auth_main.models.Gender;
+import auth_main.models.Profile;
+import auth_main.models.User;
+import auth_main.repositories.ProfileRepository;
+import auth_main.repositories.UserRepository;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class UserService {
+	
+	private final UserRepository userRepository;
+	
+	private final ProfileRepository profileRepository;
+	
+	private final PasswordEncoder passwordEncoder;
+	
+	
+	
+	
+//		using the builder design pattern to build the object.
+	public void registerNewUser(SignupRequest signupRequest) {
+		String hashedPassword = passwordEncoder.encode(signupRequest.getPassword());
+//		Build the Profile entity with default or empty values
+		Profile profile = Profile.builder()
+				.firstName("")
+				.lastName("")
+				.phoneNumber("")
+				.build();
+//		Build the User entity
+		User user = User.builder()
+					.userName(signupRequest.getUserName())
+					.password(hashedPassword)
+					.email(signupRequest.getEmail())
+					.profile(profile)
+					.build();
+		
+		profile.setUser(user);
+		
+		userRepository.save(user);
+	}
+}

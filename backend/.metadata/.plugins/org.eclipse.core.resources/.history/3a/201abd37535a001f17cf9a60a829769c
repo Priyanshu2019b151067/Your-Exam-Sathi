@@ -1,0 +1,13 @@
+package auth_main.dtos;
+
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+
+@Data
+public class SignupRequest {
+
+	@NotBlank(message = "UserName is required")
+	private String userName;
+	private String password;
+	private String email;
+}

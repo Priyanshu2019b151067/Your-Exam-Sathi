@@ -1,0 +1,15 @@
+package auth_main.models;
+
+import java.util.UUID;
+
+import org.springframework.data.annotation.Id;
+
+import jakarta.persistence.Column;
+
+public class College {
+
+	@Id
+	private UUID id;
+    @Column(nullable = false)
+	private String name;
+}

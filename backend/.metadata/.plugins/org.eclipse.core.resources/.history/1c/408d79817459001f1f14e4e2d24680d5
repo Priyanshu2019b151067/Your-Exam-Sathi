@@ -1,0 +1,5 @@
+package auth_main.repositories;
+
+public interface UserRepository {
+
+}

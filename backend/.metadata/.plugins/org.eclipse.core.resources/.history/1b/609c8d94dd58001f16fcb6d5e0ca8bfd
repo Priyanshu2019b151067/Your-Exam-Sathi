@@ -1,0 +1,5 @@
+package auth_main.controllers;
+
+public class AuthController {
+
+}

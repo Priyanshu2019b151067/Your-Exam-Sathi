@@ -1,0 +1,9 @@
+package auth_main.dtos;
+
+import lombok.Data;
+
+@Data
+public class SignupRequest {
+
+	private String userName;
+}

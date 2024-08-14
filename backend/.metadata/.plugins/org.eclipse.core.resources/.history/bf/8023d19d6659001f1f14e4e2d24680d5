@@ -1,0 +1,22 @@
+package auth_main.models;
+
+import java.math.BigInteger;
+import java.util.UUID;
+
+import org.springframework.data.annotation.Id;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
+
+
+@Data
+public class UserTbl {
+	@Id
+	private UUID id;
+}

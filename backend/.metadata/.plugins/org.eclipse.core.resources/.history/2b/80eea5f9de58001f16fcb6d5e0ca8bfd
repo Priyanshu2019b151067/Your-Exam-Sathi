@@ -1,0 +1,6 @@
+package auth_main.models;
+
+
+public class UserTbl {
+
+}

@@ -1,0 +1,10 @@
+package auth_main.services;
+
+import org.springframework.stereotype.Service;
+
+import auth_main.repositories.UserRepository;
+
+@Service
+public class UserService {
+	private UserRepository userRepository;
+}

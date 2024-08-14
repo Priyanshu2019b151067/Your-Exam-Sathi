@@ -1,0 +1,11 @@
+package auth_main.models;
+
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
+public class Course {
+
+}

@@ -1,0 +1,7 @@
+package auth_main.dtos;
+
+
+public class SignupRequest {
+
+	private String userName;
+}

@@ -1,0 +1,10 @@
+auth_main\controllers\AuthController.class
+auth_main\models\User.class
+auth_main\repositories\UserRepository.class
+auth_main\models\College.class
+auth_main\models\Course$CourseBuilder.class
+auth_main\models\Gender.class
+auth_main\models\Course.class
+auth_main\models\College$CollegeBuilder.class
+auth_main\models\User$UserBuilder.class
+auth_main\AuthServiceApplication.class

@@ -1,0 +1,10 @@
+package your_exam_sathi.auth_service;
+
+public class AuthServiceApplication {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

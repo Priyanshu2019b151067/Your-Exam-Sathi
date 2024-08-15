@@ -22,17 +22,17 @@ public class UserService {
 	private final PasswordEncoder passwordEncoder;
 
 	public void registerNewUser(SignupRequest signupRequest) {
-//		String hashedPassword = passwordEncoder.encode(signupRequest.getPassword());
+		String hashedPassword = passwordEncoder.encode(signupRequest.getPassword());
 //		Build the Profile entity with default or empty values
 		Profile profile = Profile.builder().firstName("").lastName("").phoneNumber("").isPremium(false)
 				.isVerified(false).build();
 //		Build the User entity
-		User user = User.builder().userName(signupRequest.getUserName()).password("")
+		User user = User.builder().userName(signupRequest.getUserName()).password(hashedPassword)
 
 				.email(signupRequest.getEmail()).profile(profile).build();
 
 		profile.setUser(user);
 
-//		userRepository.save(user);
+		userRepository.save(user);
 	}
 }

@@ -9,6 +9,7 @@ import lombok.Data;
 public class SignupRequest {
 
 	@NotBlank(message = "UserName is required")
+	@Size(min=5,message = "UserName must be at least 5 characters")
 	private String userName;
 	
 	@NotBlank(message = "Password is required")

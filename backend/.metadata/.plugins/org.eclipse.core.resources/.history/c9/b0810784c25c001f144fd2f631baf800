@@ -1,0 +1,7 @@
+package auth_main.config;
+
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+public interface okay extends UserDetailsService {
+
+}

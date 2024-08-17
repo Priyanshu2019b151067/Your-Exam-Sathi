@@ -1,17 +1,17 @@
 package auth_main.controllers;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import auth_main.dtos.LoginRequest;
 import auth_main.dtos.SignupRequest;
-import auth_main.repos.UserRepository;
-import auth_main.services.UserService;
+import auth_main.services.UserServices;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -19,19 +19,22 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping(path = "/api/auth")
 @RequiredArgsConstructor
 public class AuthController {
-
-//	
-//	@GetMapping
-//	public String shriGanesh() {
-//		return "OM";
-//	}
-	
-	private final UserService userService;
+	private final UserServices userService;
 	
 	@PostMapping("/signup")
 	public ResponseEntity<String> registerUser(@Validated @RequestBody SignupRequest signupRequest){
-		userService.registerNewUser(signupRequest);
-		return ResponseEntity.ok("User registered successfully.");
+		try {
+	        userService.registerNewUser(signupRequest);
+	        return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully.");
+	    } catch (IllegalArgumentException e) {
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+	    }
+	}
+	
+	@PostMapping("/login")
+	public ResponseEntity<?> loginUser(@Validated @RequestBody LoginRequest loginRequest){
+		
+		return null;
 	}
 	
 	

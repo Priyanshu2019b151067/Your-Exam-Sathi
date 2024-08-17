@@ -1,0 +1,5 @@
+package auth_main.services;
+
+public abstract class UserServices {
+	public abstract void registerNewUser();
+}

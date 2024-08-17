@@ -1,0 +1,5 @@
+package auth_main.repos;
+
+public interface RolesRepository  extends {
+
+}

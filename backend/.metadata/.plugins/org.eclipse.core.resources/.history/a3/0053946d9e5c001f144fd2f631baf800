@@ -1,0 +1,54 @@
+package auth_main.services;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import auth_main.dtos.SignupRequest;
+
+import auth_main.models.Profile;
+import auth_main.models.User;
+import auth_main.repos.ProfileRepository;
+import auth_main.repos.RolesRepository;
+import auth_main.repos.UserRepository;
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class UserService {
+
+	private final UserRepository userRepository;
+
+	private final ProfileRepository profileRepository;
+
+	private final PasswordEncoder passwordEncoder;
+	
+	private final RolesRepository rolesRepository;
+
+	public boolean registerNewUser(SignupRequest signupRequest) {
+		if (userRepository.existsByEmail(signupRequest.getEmail())) {
+	        throw new IllegalArgumentException("Email already in use.");
+	    }
+
+	    if (userRepository.existsByUserName(signupRequest.getUserName())) {
+	        throw new IllegalArgumentException("Username already in use.");
+	    }
+
+		String hashedPassword = passwordEncoder.encode(signupRequest.getPassword());
+		Profile profile = Profile.builder()
+				.firstName("")
+				.lastName("")
+				.phoneNumber("")
+				.isPremium(false)
+				.isVerified(false).build();
+//		Build the User entity
+		User user = User.builder()
+				.userName(signupRequest.getUserName())
+				.password(hashedPassword)
+				.email(signupRequest.getEmail())
+				.profile(profile).build();
+
+		profile.setUser(user);
+		userRepository.save(user);
+		return true;
+	}
+}
